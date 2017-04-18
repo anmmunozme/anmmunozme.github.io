@@ -63,7 +63,7 @@ for (var i = 0; i<=data.length; i++) {
       position: new google.maps.LatLng(data[i].latitude,data[i].longitude),
 	      map: map,
 	      title: data[i].address,
-	      icon: "images/icon2.png"
+	      icon: "images/iconp.png"
     });
     policeM.push(marker);
     markers.push(marker);
@@ -93,13 +93,13 @@ $.ajax({
     "$$app_token" : "HUjUGsr4YSMjvcwZejaYLHoBl"
   }
 }).done(function(data) {
-document.getElementById("inforentall").innerHTML =  "All (" + data.length + ") parks";
+document.getElementById("inforentall").innerHTML =  "All (" + data.length + ") Parks";
 for (var i = 0; i<=data.length; i++) {
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(data[i].location.coordinates[1],data[i].location.coordinates[0]),
 	      map: map,
 	      title: data[i].address,
-	      icon: "images/icon2.png"
+	      icon: "images/iconpa.png"
     });
     parkM.push(marker);
     markers.push(marker);
@@ -129,14 +129,14 @@ $.ajax({
     "$$app_token" : "HUjUGsr4YSMjvcwZejaYLHoBl"
   }
 }).done(function(data) {
-document.getElementById("inforentall").innerHTML =  "All (" + data.length + ") fire";
+document.getElementById("inforentall").innerHTML =  "(" + data.length + ") Fire Stations";
 for (var i = 0; i<=data.length; i++) {
     var marker = new google.maps.Marker({
       //position: new google.maps.LatLng(data[i].columns[6].cachedContents.largest.latitude,data[i].columns[6].cachedContents.largest.longitude),
 	  position: new google.maps.LatLng(data[i].location.coordinates[1],data[i].location.coordinates[0]),
 		  map: map,
 	      title: data[i].address,
-	      icon: "images/icon2.png"
+	      icon: "images/iconfi.png"
     });
     fireM.push(marker);
     markers.push(marker);
@@ -154,5 +154,3 @@ function fireHandler(){
      }
    }
 }
-
-
