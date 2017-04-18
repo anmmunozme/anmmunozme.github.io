@@ -22,7 +22,7 @@
 <!-- my JavaScript file-->
 <script src="js1.js"> </script>
 <script src="mainjs.js"> </script>
-
+<script src="listener.js"> </script>
 <!-- Style map-->
 <style type="text/css">
 #map {
@@ -68,6 +68,7 @@
   		</select>
         <label class="labele" for="distance">Distance to university</label>
        <br>
+
        <select class="selectt" name="optiond">
     		<option value="" disabled selected></option>
     		<option value="1">Option 1</option>
@@ -75,35 +76,30 @@
     		<option value="3">Option 3</option>
   		</select>
         <br>
+        <!--
+        <div class="checkbox checkbox-primary">
+        <input id="checkbox2" type="checkbox" >
+        <label for="checkbox2">Primary</label>
+      </div> -->
 
-        <div class="col-md-3 btn-group" data-toggle="buttons">
-        Parks
-  			<label class="btn btn-primary">
-				<input type="checkbox" autocomplete="off">
-				<span class="glyphicon glyphicon-ok"></span>
-			</label>
+        <div class="col-md-3 checkbox checkbox-primary">
+  			<label><input type="checkbox" id="park_check" autocomplete="off">Parks
+        </label>
         </div>
 
-        <div class="col-md-3 btn-group" data-toggle="buttons">
-        Police stations
-  			<label class="btn btn-primary">
-				<input type="checkbox" autocomplete="off">
-				<span class="glyphicon glyphicon-ok"></span>
-			</label>
+        <div class="col-md-3 checkbox checkbox-primary">
+  			<label><input type="checkbox" id="police_check" autocomplete="off">Police Stations
+        </label>
         </div>
-        <div class="col-md-3 btn-group" data-toggle="buttons">
-        Fire Stations
-  			<label class="btn btn-primary">
-				<input type="checkbox" autocomplete="off">
-				<span class="glyphicon glyphicon-ok"></span>
-			</label>
+
+        <div class="col-md-3 checkbox checkbox-primary">
+  			<label><input type="checkbox" id="fire_check" autocomplete="off">Fire Stations
+        </label>
         </div>
-        <div class="col-md-3 btn-group" data-toggle="buttons">
-        Hospitals
-  			<label class="btn btn-primary">
-				<input type="checkbox" autocomplete="off">
-				<span class="glyphicon glyphicon-ok"></span>
-			</label>
+
+        <div class="col-md-3 checkbox checkbox-primary">
+  			<label><input type="checkbox" id="hospital_check" autocomplete="off">Hospitals
+        </label>
         </div>
 
         <br>
@@ -146,6 +142,9 @@
             <button onclick="rentHid()" class="botonp">Hide all places</button>
             <p id="inforentall" onclick="rent(map)">nanana</p>
 
+         
+
+
              <div class="col-md-3 btn-group" data-toggle="buttons">
         test show
   			<label class="btn btn-primary">
@@ -155,7 +154,7 @@
         </div>
         <br></br>
         <button onclick="clearMarkers()" class="botonp">Clear Markers</button>
-        <button  class="botonp">bicycle routes</button>
+        <button onclick="bic(map)" class="botonp">bicycle routes</button>
     	</div>
     	<div class="col-sm-7 col-md-7">
     		<div id="map" ></div>
