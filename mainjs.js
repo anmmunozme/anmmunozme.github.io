@@ -1,30 +1,31 @@
 var rentM = [];
 var markers = [];
-var markers2=[[],[],[],[],[]];
 var policeM = [];
 var parkM = [];
 var fireM = [];
+var hospitalM = [];
 
   function rent(map){
 $.ajax({
     url: "https://data.cityofchicago.org/resource/uahe-iimk.json",
     type: "GET",
     data: {
+      "$where" : "latitude IS NOT NULL" ,
       "$$app_token" : "HUjUGsr4YSMjvcwZejaYLHoBl"
     }
 }).done(function(data) {
-  document.getElementById("inforentall").innerHTML =  "All (" + data.length + ") rent places";
+  document.getElementById("inforentall").innerHTML =  "(" + data.length + ") Rent places";
     for (var i = 0; i <= data.length; i++) {
-
+      place = new google.maps.LatLng(data[i].latitude,data[i].longitude);
 		  var marker = new google.maps.Marker({
 	      position: new google.maps.LatLng(data[i].latitude,data[i].longitude),
 	      map: map,
 	      title: data[i].address,
-	      icon: "images/icon2.png"
+	      icon: "images/icon2.png",
+        distance: distan(place)
 	   	});
       rentM.push(marker);
       markers.push(marker);
-
     };
 });
 }
@@ -44,9 +45,10 @@ function clearMarkers() {
 
 function bic(map) {
   map.data.loadGeoJson('https://data.cityofchicago.org/api/geospatial/kdt9-s6vu?method=export&format=GeoJSON');
-
 }
-
+function bicf(map) {
+  map.data.setMap(null);
+}
 //Police stations
 
 function police(map){
@@ -57,13 +59,13 @@ $.ajax({
     "$$app_token" : "HUjUGsr4YSMjvcwZejaYLHoBl"
   }
 }).done(function(data) {
-document.getElementById("inforentall").innerHTML =  "All (" + data.length + ") police stations";
+document.getElementById("infopolall").innerHTML =  "(" + data.length + ") Police stations";
 for (var i = 0; i<=data.length; i++) {
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(data[i].latitude,data[i].longitude),
 	      map: map,
 	      title: data[i].address,
-	      icon: "images/iconp.png"
+	      icon: "images/iconpol.png"
     });
     policeM.push(marker);
     markers.push(marker);
@@ -73,7 +75,6 @@ for (var i = 0; i<=data.length; i++) {
 
 function policeHandler(){
   if(police_check.checked){
-    document.getElementById("inforentall").innerHTML =  "All";
     police(map);
    }
    else{
@@ -93,7 +94,7 @@ $.ajax({
     "$$app_token" : "HUjUGsr4YSMjvcwZejaYLHoBl"
   }
 }).done(function(data) {
-document.getElementById("inforentall").innerHTML =  "All (" + data.length + ") Parks";
+document.getElementById("infoparkall").innerHTML =  "(" + data.length + ") Parks";
 for (var i = 0; i<=data.length; i++) {
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(data[i].location.coordinates[1],data[i].location.coordinates[0]),
@@ -129,14 +130,14 @@ $.ajax({
     "$$app_token" : "HUjUGsr4YSMjvcwZejaYLHoBl"
   }
 }).done(function(data) {
-document.getElementById("inforentall").innerHTML =  "(" + data.length + ") Fire Stations";
+document.getElementById("infofireall").innerHTML =  "(" + data.length + ") Fire Stations";
 for (var i = 0; i<=data.length; i++) {
     var marker = new google.maps.Marker({
       //position: new google.maps.LatLng(data[i].columns[6].cachedContents.largest.latitude,data[i].columns[6].cachedContents.largest.longitude),
 	  position: new google.maps.LatLng(data[i].location.coordinates[1],data[i].location.coordinates[0]),
 		  map: map,
 	      title: data[i].address,
-	      icon: "images/iconfi.png"
+	      icon: "images/iconfire.png"
     });
     fireM.push(marker);
     markers.push(marker);
@@ -154,3 +155,80 @@ function fireHandler(){
      }
    }
 }
+
+//Hospitals
+function hospital(map){
+$.ajax({
+  url: "https://data.cityofchicago.org/resource/23z4-s99a.json",
+  type: "GET",
+  data: {
+    "$$app_token" : "HUjUGsr4YSMjvcwZejaYLHoBl"
+  }
+}).done(function(data) {
+document.getElementById("infohospall").innerHTML =  "(" + data.length + ") Hospitals";
+for (var i = 0; i<=data.length; i++) {
+    var marker = new google.maps.Marker({
+	  position: new google.maps.LatLng(data[i].location.coordinates[1],data[i].location.coordinates[0]),
+		  map: map,
+	      title: data[i].address,
+	      icon: "images/iconho.png"
+    });
+    hospitalM.push(marker);
+    markers.push(marker);
+  };
+});
+}
+
+function hospitalHandler(){
+  if(hospital_check.checked){
+    hospital(map);
+   }
+   else{
+     for (var i = 0; i < hospitalM.length; i++) {
+             hospitalM[i].setMap(null);
+     }
+   }
+}
+
+function distan(place){
+	return Math.round(google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(41.8708, -87.6505),place));
+}
+
+//new token edxWNVIMowiRcUIqCKuBIdkCAEmTyvze
+/*
+function rentfilter(map){
+  var rentl = [];
+  var rentlm = [];
+  var rente =[];
+$.ajax({
+  url: "https://data.cityofchicago.org/resource/uahe-iimk.json",
+  type: "GET",
+  data: {
+    "$where" : "latitude IS NOT NULL" ,
+    "$$app_token" : "HUjUGsr4YSMjvcwZejaYLHoBl"
+  }
+}).done(function(data) {
+  for (var i = 0; i <= data.length; i++) {
+    place = new google.maps.LatLng(data[i].latitude,data[i].longitude);
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(data[i].latitude,data[i].longitude),
+      //map: map,
+      title: data[i].address,
+      distance: distan(place)
+    });
+
+    markers.push(marker);
+    if(marker.distance <= 7000){
+      rentl.push(marker);
+    } else if(marker.distance > 7000 && marker.distance <= 14000){
+      rentlm.push(marker);
+    }else if(marker.distance > 14000){
+      rente.push(marker);
+    }
+  };
+
+
+});
+console.log(rentlm);
+}
+*/

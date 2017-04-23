@@ -19,8 +19,17 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<!-- d3-->
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<!-- Load c3.css -->
+<link href="c3.css" rel="stylesheet" type="text/css">
+<!-- Load c3.js -->
+<script src="c3.js"></script>
+
 <!-- my JavaScript file-->
 <script src="js1.js"> </script>
+<script src="climate.js"> </script>
 <script src="mainjs.js"> </script>
 <script src="listener.js"> </script>
 <!-- Style map-->
@@ -62,40 +71,38 @@
        <br>
        <select class="selectt" name="optionp">
     		<option value="" disabled selected></option>
-    		<option value="1">Option 1</option>
-    		<option value="2">Option 2</option>
-    		<option value="3">Option 3</option>
+    		<option value="1">$300 - $2000</option>
+    		<option value="2">$2001 - $3500</option>
+    		<option value="3">$3501 - +</option>
   		</select>
         <label class="labele" for="distance">Distance to university</label>
        <br>
 
        <select class="selectt" name="optiond">
     		<option value="" disabled selected></option>
-    		<option value="1">Option 1</option>
-    		<option value="2">Option 2</option>
-    		<option value="3">Option 3</option>
+    		<option value="1">0 km - 14 km</option>
+    		<option value="2">15 km - 30 km</option>
+    		<option value="3">31 km - 45 km </option>
   		</select>
         <br>
-        <!--
-        <div class="checkbox checkbox-primary">
-        <input id="checkbox2" type="checkbox" >
-        <label for="checkbox2">Primary</label>
-      </div> -->
 
         <div class="col-md-3 checkbox checkbox-primary">
   			<label><input type="checkbox" id="park_check" autocomplete="off">Parks
         </label>
         </div>
+        <span></span>
 
         <div class="col-md-3 checkbox checkbox-primary">
   			<label><input type="checkbox" id="police_check" autocomplete="off">Police Stations
         </label>
         </div>
+        <span></span>
 
         <div class="col-md-3 checkbox checkbox-primary">
   			<label><input type="checkbox" id="fire_check" autocomplete="off">Fire Stations
         </label>
         </div>
+        <span></span>
 
         <div class="col-md-3 checkbox checkbox-primary">
   			<label><input type="checkbox" id="hospital_check" autocomplete="off">Hospitals
@@ -124,7 +131,16 @@
 
   <div class="contenidoob" id="information">
     <h3>Information</h3>
-    <p></p>
+    <div style="margin: 0 0 0 15px">
+      <h4><b>Weather</b></h4>
+      <p>The last record is:</p>
+      <p id="infoweather"></p>
+    </div>
+    <div style="margin: 20px 0 0 15px">
+      <h4><b>Graphics</b></h4>
+      <p>The following graph shows the temperature of the last 8 months</p>
+      <div id="Dchart" class="chart"></div>
+    </div>
 
   </div>
   <!-- -->
@@ -133,32 +149,30 @@
  <h3>Map</h3>
  	<div class="row">
  		<div class="col-sm-5 col-md-5">
-    		<p></p>
-            <p><button class="botonp" id="id_btnt" >test</button></p>
-            <p></p>
-
-
-            <button onclick="rent(map)" class="botonp">Show all places</button>
-            <button onclick="rentHid()" class="botonp">Hide all places</button>
-            <p id="inforentall" onclick="rent(map)">Show</p>
-
-
-
-             <div class="col-md-3 btn-group" data-toggle="buttons">
-        test show
-  			<label class="btn btn-primary">
-				<input type="checkbox"  id="rent_check" autocomplete="off">
-				<span class="glyphicon glyphicon-ok"></span>
-			</label>
-        </div>
+    		<p>On this map you can find:</p>
+        <p id="inforentall" onclick="rent(map)">Rent places</p>
+        <p id="infoparkall" >Parks</p>
+        <p id="infopolall" >Police stations</p>
+        <p id="infofireall" >Fire stations</p>
+        <p id="infohospall" >Hospitals</p>
         <br></br>
+        <button onclick="rent(map)" class="botonp">Show all places</button>
+        <button onclick="rentHid()" class="botonp">Hide all places</button>
+        <br></br>
+        <button onclick="bic(map)" class="botonp">Bicycle routes</button>
+        <button onclick="bicf(map)" class="botonp">Hide bicycle routes</button>
+
         <button onclick="clearMarkers()" class="botonp">Clear Markers</button>
-        <button onclick="bic(map)" class="botonp">bicycle routes</button>
-    	</div>
+    <!--    <button onclick="rentfilter(map)" class="botonp">Show per</button> -->
+    <!--    <button onclick="climate()" class="botonp">Clima</button>-->
+
+      </div>
     	<div class="col-sm-7 col-md-7">
     		<div id="map" ></div>
         </div>
+
     </div>
+
     <a href="#" id="toTop" class="" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
 </div>
 
@@ -191,7 +205,7 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnqaWEJpQebKVl995zKz8G2f2nkoYDy9w&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnqaWEJpQebKVl995zKz8G2f2nkoYDy9w&callback=initMap&libraries=geometry">
     </script>
 
 </body>
