@@ -4,5 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.querySelector('#park_check').addEventListener('change', parkHandler);
 	document.querySelector('#fire_check').addEventListener('change', fireHandler);
 	document.querySelector('#hospital_check').addEventListener('change', hospitalHandler);
+	document.querySelector('#crime_check').addEventListener('change', crimeHandler);
 
 });

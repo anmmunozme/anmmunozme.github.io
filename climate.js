@@ -41,7 +41,7 @@ $(document).ready(function() {
 
       if(data.results[key].datatype == "PRCP"){
         prcpa.push(data.results[key].value);
-				console.log(data.results[key]);
+				//console.log(data.results[key]);
 			}
       /*if(data.results[key].datatype == "TAVG"){
         if(data.results[key].date && (typeof (data.results[key].value) == undefined)){
@@ -54,15 +54,15 @@ $(document).ready(function() {
 
       if(data.results[key].datatype == "TAVG"){
         tavga.push(data.results[key].value);
-        console.log(data.results[key]);
+        //console.log(data.results[key]);
 			}
       if(data.results[key].datatype == "TMAX"){
         tmaxa.push(data.results[key].value);
-        console.log(data.results[key]);
+        //console.log(data.results[key]);
 			}
       if(data.results[key].datatype == "TMIN"){
         tmina.push(data.results[key].value);
-        console.log(data.results[key]);
+        //console.log(data.results[key]);
 			}
     }
     //console.log(prcpa, tavga, tmaxa, tmina);

@@ -4,6 +4,7 @@ var policeM = [];
 var parkM = [];
 var fireM = [];
 var hospitalM = [];
+var crimeM = [];
 
   function rent(map){
 $.ajax({
@@ -14,7 +15,7 @@ $.ajax({
       "$$app_token" : "HUjUGsr4YSMjvcwZejaYLHoBl"
     }
 }).done(function(data) {
-  document.getElementById("inforentall").innerHTML =  "(" + data.length + ") Rent places";
+  //document.getElementById("inforentall").innerHTML =  "(" + data.length + ") Rent places";
     for (var i = 0; i <= data.length; i++) {
       place = new google.maps.LatLng(data[i].latitude,data[i].longitude);
 		  var marker = new google.maps.Marker({
@@ -186,6 +187,40 @@ function hospitalHandler(){
    else{
      for (var i = 0; i < hospitalM.length; i++) {
              hospitalM[i].setMap(null);
+     }
+   }
+}
+
+//Crimes
+function crime(map){
+$.ajax({
+  url: "https://data.cityofchicago.org/resource/crimes.json",
+  type: "GET",
+  data: {
+    "$$app_token" : "HUjUGsr4YSMjvcwZejaYLHoBl"
+  }
+}).done(function(data) {
+document.getElementById("infocrimeall").innerHTML =  "(" + data.length + ") Crimes reported";
+for (var i = 0; i<=data.length; i++) {
+    var marker = new google.maps.Marker({
+	  position: new google.maps.LatLng(data[i].location.latitude,data[i].location.longitude),
+		  map: map,
+	      title: data[i].address,
+	      icon: "images/iconcr.png"
+    });
+    crimeM.push(marker);
+    markers.push(marker);
+  };
+});
+}
+
+function crimeHandler(){
+  if(crime_check.checked){
+    crime(map);
+   }
+   else{
+     for (var i = 0; i < crimeM.length; i++) {
+             crimeM[i].setMap(null);
      }
    }
 }
