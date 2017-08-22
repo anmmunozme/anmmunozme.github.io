@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- barras css -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <script
   src="https://code.jquery.com/jquery-3.2.1.js"
@@ -48,7 +50,9 @@
 <div class="barra w3-white w3-large">
   <a href="#" class="barra-item item-azul"><i class="fa fa-map-marker"></i>Home</a>
   <a href="#profile" class="barra-item">Profile</a>
-  <a href="#contact" class="barra-item">Cotact</a>
+  <a href="#skills" class="barra-item">Skills</a>
+  <a href="#projects" class="barra-item">Projects</a>
+  <a href="#languages" class="barra-item">Languages</a>
   <a href="#filter" class="barra-item">Filter</a>
   <a href="#options" class="barra-item ">Option</a>
   <a href="#information" class="barra-item">Information</a>
@@ -58,7 +62,6 @@
 <!-- Header -->
 <header class="contenedorimage">
   <p>My Profile</p>
-  <p>Find the best residence for your needs!!</p>
 </header>
 
 <!-- Page content -->
@@ -67,12 +70,44 @@
   <div class="contenidoob" id="profile">
     <h3>My profile</h3>
        <p>Agela María Muñoz</p>
-       <p>Estudiate de igeniería de sistemas y comutación</p>
+       <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large "></i>Estudiate de igeniería de sistemas y comutación</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Bogotá, Colombia</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>anmmunozme@unal.edu.co</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>3190000000</p>
+       
   </div>
    <!-- -->
-  <div class="contenidoob" id="contact">
-    <h3>Contact</h3>
-       <p>anmmunozme@unal.edu.co</p>
+  <div class="contenidoob" id="skills">
+    <h3>Skills</h3>
+       <p>Python</p>
+          <div class="w3-light-grey w3-small ">
+            <div class="w3-container w3-center" style="background-color:#F72257;width:90%">70%</div>
+          </div>
+    
+  </div>
+	<!-- -->
+    
+    <!-- -->
+  <div class="contenidoob" id="projects">
+    <h3>Projects</h3>
+       <p>//</p>
+  </div>
+	<!-- -->
+    <!-- -->
+  <div class="contenidoob" id="languages">
+    <h3>Languages</h3>
+   	<p>Spanish</p>
+          <div class="w3-light-grey w3-round-xlarge" style="background-color:#F72257">
+            <div class="w3-xlarge" style="background-color:#F72257;height:24px;width:100%"></div>
+          </div>
+       <p>English</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-xlarge" style="background-color:#F72257;height:24px;width:70%"></div>
+          </div>
+       <p>German</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-xlarge" style="background-color:#F72257;height:24px;width:20%"></div>
+          </div>
   </div>
 	<!-- -->
   <div class="contenidoob" id="filter">
@@ -172,20 +207,20 @@
  	<div class="row">
  		<div class="col-sm-5 col-md-5">
     		<p>On this map you can find:</p>
-        <p id="inforentall" onclick="rent(map)">Rent places</p>
+        <p id="inforentall" onClick="rent(map)">Rent places</p>
         <p id="infoparkall" >Parks</p>
         <p id="infopolall" >Police stations</p>
         <p id="infofireall" >Fire stations</p>
         <p id="infohospall" >Hospitals</p>
         <p id="infocrimeall" >Crimes reported</p>
         <br></br>
-        <button onclick="rent(map)" class="botonp">Show all places</button>
-        <button onclick="rentHid()" class="botonp">Hide all places</button>
+        <button onClick="rent(map)" class="botonp">Show all places</button>
+        <button onClick="rentHid()" class="botonp">Hide all places</button>
         <br></br>
-        <button onclick="bic(map)" class="botonp">Bicycle routes</button>
-        <button onclick="bicf(map)" class="botonp">Hide bicycle routes</button>
+        <button onClick="bic(map)" class="botonp">Bicycle routes</button>
+        <button onClick="bicf(map)" class="botonp">Hide bicycle routes</button>
 
-        <button onclick="clearMarkers()" class="botonp">Clear Markers</button>
+        <button onClick="clearMarkers()" class="botonp">Clear Markers</button>
     <!--    <button onclick="rentfilter(map)" class="botonp">Show per</button> -->
     <!--    <button onclick="climate()" class="botonp">Clima</button>-->
 

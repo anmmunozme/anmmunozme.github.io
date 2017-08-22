@@ -40,7 +40,7 @@ i:hover{
 }
 .item-azul{
     color: #fff!important;
-    background-color:#1ABEEE;
+	background-color:#F72257;
 }
 .contenedorimage{
 	background-image:url(images/icd.jpg);
@@ -120,7 +120,7 @@ i:hover{
 }
 
 #toTop {
-	background:url(images/bou3.png);
+	background:url(images/bou4.png);
     display: none;
     text-decoration: none;
     position: fixed;
