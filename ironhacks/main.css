@@ -38,10 +38,9 @@ i:hover{
 	background-color:#C5C5C5;
 	text-decoration:none;
 }
-.item-rosa{
+.item-azul{
     color: #fff!important;
-	background-color:#F72257;
-	border-color:#F72257;
+    background-color:#1ABEEE;
 }
 .contenedorimage{
 	background-image:url(images/icd.jpg);
@@ -121,7 +120,7 @@ i:hover{
 }
 
 #toTop {
-	background:url(images/bou4.png);
+	background:url(images/bou3.png);
     display: none;
     text-decoration: none;
     position: fixed;
