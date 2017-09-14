@@ -23,9 +23,6 @@ int x,y;
 void setup() {
   size(800, 800);
    numElements = ((width-margen*2)/esp) * ((height-margen*2)/esp);
-  // println(numElements); /* para saber el número de elementos */
-
-  // inicializar el arreglo de floats "puntos"
   punto = new float[numElements];
   fill(0);
   stroke(0);
@@ -112,12 +109,9 @@ void scintillating() {
     }
   }
 }
-void lineAndBall(){
-  ellipse(56, 46, 55, 55);
-  
-}
 
 void helix(){
+  //tomado de: https://www.openprocessing.org/sketch/2789
   for (int y = margen; y < height-margen; y += esp) {
     for (int x = margen; x < width-margen; x += esp) {
       helix(x, y, counter);
@@ -199,47 +193,49 @@ void moirecircles(){
 }
 
 void enigma(){
-  //http://www.michaelbach.de/ot/mot-enigma/index.html
+  /*Algunas actividades "centelleantes" se acumularán en los anillos
+  http://www.michaelbach.de/ot/mot-enigma/index.html
+  "El enigma" (1981) por la pintora Isralia Isia Leviant (1914-2006)*/
   background(250);
-smooth();
-noStroke();
+  smooth();
+  noStroke();
 
-int diameter = width+350;
-int points = 180; //number of points
-float pointAngle = 360/points; //angle between points
-float angulo = 0 ;
+  int diameter = width+350;
+  int points = 180; //number of points
+  float pointAngle = 360/points; //angle between points
+  float angulo = 0 ;
 
-float[] angs = new float[points];
-for (int i = 0; i < angs.length; i++){
-  angs[i] = angulo + pointAngle;
-}
-float lastAng = 0;
-for (int i = 0; i < angs.length; i++){
-  if(i%2==0){
-    fill(0);}
-  else{
-    fill(250);
+  float[] angs = new float[points];
+  for (int i = 0; i < angs.length; i++){
+    angs[i] = angulo + pointAngle;
   }
-  arc(width/2, height/2, diameter, diameter, lastAng, lastAng+radians(angs[i]));
-  lastAng += radians(angs[i]);  
-}
-if(active){
-  fill(#ffff00);
-  ellipse(width/2, height/2, 126,126);
-  noFill();
-  stroke(#ffff00);
-  strokeWeight(22);
-  ellipse(width/2, height/2, 230,230);
-  noStroke();
+  float lastAng = 0;
+  for (int i = 0; i < angs.length; i++){
+    if(i%2==0){
+      fill(0);}
+    else{
+      fill(250);
+    }
+    arc(width/2, height/2, diameter, diameter, lastAng, lastAng+radians(angs[i]));
+    lastAng += radians(angs[i]);  
+  }
+  if(active){
+    fill(#ffff00);
+    ellipse(width/2, height/2, 126,126);
+    noFill();
+    stroke(#ffff00);
+    strokeWeight(22);
+    ellipse(width/2, height/2, 230,230);
+    noStroke();
   
-  stroke(#ffff00);
-  strokeWeight(40);
-  ellipse(width/2, height/2, 400,400);
-  noStroke();
+    stroke(#ffff00);
+    strokeWeight(40);
+    ellipse(width/2, height/2, 400,400);
+    noStroke();
   
-  stroke(#ffff00);
-  strokeWeight(60);
-  ellipse(width/2, height/2, 620,620);
+    stroke(#ffff00);
+    strokeWeight(60);
+    ellipse(width/2, height/2, 620,620);
   }
 }
 
@@ -280,14 +276,15 @@ void inf(){
 }
 
 void colorbn(){
+  
   background(255);
   int color1=50;
   strokeWeight(1);
   if(active){
-    for(int g=1;g<=800;g++){
+    for(int i=1;i<=800;i++){
       stroke(color1);
-      line(g,0,g,800);
-      if(g%4==0)
+      line(i,0,i,800);
+      if(i%4==0)
       color1++;
     }
   }
