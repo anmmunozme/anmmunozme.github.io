@@ -79,21 +79,25 @@
           <hr>
 
           <!-- Post Content -->
-          <p class="lead">Un enfoque en rasterización para solucionar el problema de visibilidad de imágenes complicadas es la implementación de algoritmos de determinación o eliminación de caras ocultas (HSR – hidden surface removal), en este blog hablamos específicamente del algoritmo de Warnock.</p>
+          <p class="lead">Un enfoque para solucionar el problema de visibilidad de imágenes complicadas es la implementación de algoritmos de determinación o eliminación de caras ocultas (HSR – hidden surface removal), en este blog hablamos específicamente del algoritmo de Warnock.</p>
 
 			<h2 class="mt-0">HSR</h2>
-          <p> Empecemos definiendo que es <strong> HSR </strong>, es el proceso usado para determinar que superficies y partes de superficies no son visibles desde algún punto de observación, es decir identifica que cosas no se van a ver.
+          <p> 
+          En la computación gráfica se busca representar objetos en general, y debido a que la mayoría de los objetos no son transparentes es de interés diferenciar las superficies externas que afectan la representación gráfica, de las internas. [2] Empecemos definiendo que es <strong> HSR </strong>, es el proceso usado para determinar que superficies y partes de superficies no son visibles desde algún punto de observación, es decir identifica que cosas no se van a ver en una representación gráfica.
           </p>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
           
           <h3 class="mt-0">	Técnicas para la eliminación de las caras ocultas</h3>
-          <p><strong>Selección por prisma de visión</strong></p>
-          <p><strong>Selección de caras visibles</strong></p>
-          <p><strong>Selección por oclusión</strong>></p>
+          <p>Hay muchas técnicas para la determinación de superficies ocultas. Ellos son fundamentalmente un ejercicio de clasificación , y por lo general varían en el orden en que se realiza el tipo y cómo se subdivide el problema. Ordenar grandes cantidades de primitivas gráficas se hace normalmente dividiendo y conquistando. [3]</p> 
+          <p>La ventaja de la eliminación temprana en la tubería es que objetos enteros que son invisibles no tienen que ser buscados, transformados, rasterizados o sombreados.[3] Algunos tipos de algoritmos de eliminación son:[2]</p>
+          <p><strong>Selección por prisma de visión (frustum culling):</strong> La selección por prisma es una representación geométrica del campo de visibilidad de la cámara. Naturalmente los objetos fuera de este prisma no serán visibles en la imagen final, por tanto serán descartados.</p>
+          <p><strong>Selección de caras visibles:</strong> En la selección de caras visibles se tiene en cuenta que algunas caras de los objetos o polígonos de la malla no son visibles desde la cámara por lo que no hay razón para que sean dibujadas. Esta es la razón por la que algunos videojuegos si acercamos la cámara dentro de algún objeto de la escena este desaparece.</p>
+          <p><strong>Selección por oclusión:</strong> Los objetos que se encuentran ocultados totalmente por otros objetos opacos pueden ser excluidos de la imagen final. Este es un mecanismo muy popular para aumentar el rendimiento del rendering de grandes escenas. </p>
           
           
           <h2 class="mt-0">Algoritmo de Warnock</h2>
+          <p>
+          Este algoritmo fue inventado en 1969 por John Warnock y es utilizado en computación gráfica, como se menciona anteriormente, soluciona al problema de visualización de imágenes complicadas realizando subdivisión recursiva de una escena hasta que las áreas obtenidas son fácilmente calculables. En otras palabras, hasta que la escena sea tan sencilla que permita calcular eficientemente su visualización. [1]
+          </p>
           <p>
           Este  es un algoritmo divide y vencerás de orden  <strong> O(np) </strong> siendo  <strong> n </strong> el número de polígonos y <strong>p</strong> el número de pixeles en el área de dibujo (viewport en inglés).
           </p>
@@ -102,9 +106,7 @@
           <img class="img-fluid rounded" align src="imagenes/Warnock_area4.png" alt="">
           <p>Visibilidad de un polígono en un área de dibujo: a) el polígono llena el área de dibujo, b) el polígono la llena parcialmente, c) el polígono es completamente visible, d) el polígono es invisible.</p>
           </div>
-          <p>
-          Las entradas son una lista de polígonos y un área de dibujo. El mejor caso se presenta cuando la lista de polígonos es sencilla, entonces se puede dibujar los polígonos en el área de dibujo. Por sencillo se entiende que el polígono mida un pixel (en cuyo caso el polígono o su parte se dibuja en la correspondiente parte del área de dibujo) o que el área de dibujo mida un pixel (en cuyo caso el pixel toma el color del polígono más cercano al observador). El paso recurrente consiste en dividir el área de dibujo en cuatro cuadrantes de igual tamaño y llamar al algoritmo para cada cuadrante con la lista de polígonos modificada tal que lo sólo contenga polígonos visibles en el cuadrante.3​
-          </p>
+          
           <h3 class="mt-0">Área de subdivisión</h3>
           
           <div align="center">
@@ -133,7 +135,9 @@
             </footer>
           </blockquote>
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
+          <p>
+          Las entradas son una lista de polígonos y un área de dibujo. El mejor caso se presenta cuando la lista de polígonos es sencilla, entonces se puede dibujar los polígonos en el área de dibujo. Por sencillo se entiende que el polígono mida un pixel (en cuyo caso el polígono o su parte se dibuja en la correspondiente parte del área de dibujo) o que el área de dibujo mida un pixel (en cuyo caso el pixel toma el color del polígono más cercano al observador). El paso recurrente consiste en dividir el área de dibujo en cuatro cuadrantes de igual tamaño y llamar al algoritmo para cada cuadrante con la lista de polígonos modificada tal que lo sólo contenga polígonos visibles en el cuadrante.[1]
+          </p>
           <div align="left">
           <h3 class="mt-0">Pseudocódigo </h3>
           <pre>
@@ -148,9 +152,17 @@
             	Warnock(PL en VP4, VP4)
     	end
           </pre>
+          <p>Otra aproximación al pseudocódigo se encuentra en http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf</p>
           </div>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
+          <h3 class="mt-0">Ventajas y desventajas </h3>
+          <ul><strong>Ventajas:</strong>
+          <li>No ocurre over-rendering</li>
+          <li>Buen anti-aliasing: basta con hacer una subdivisión para obtener más
+información de sub-píxel</li>
+</ul>
+<ul><strong>Desventaja:</strong>
+<li>Las pruebas son complejas y lentas</li>
+</ul>
 
           <hr>
 
@@ -160,7 +172,11 @@
           <div class="media mb-4">
             <div class="media-body">
               <h5 class="mt-0">Referencias</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+              <ul>
+              	<li>[1] https://es.wikipedia.org/wiki/Algoritmo_de_Warnock</li>
+                <li>[2] https://es.wikipedia.org/wiki/Determinaci%C3%B3n_de_cara_oculta</li>
+                <li>[3] https://en.wikipedia.org/wiki/Hidden_surface_determination</li>
+              </ul>
             </div>
           </div>
 
