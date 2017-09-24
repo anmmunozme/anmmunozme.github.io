@@ -102,12 +102,14 @@
           Este  es un algoritmo divide y vencerás de orden  <strong> O(np) </strong> siendo  <strong> n </strong> el número de polígonos y <strong>p</strong> el número de pixeles en el área de dibujo (viewport en inglés).
           </p>
           <h3 class="mt-0">Algoritmos de subdivisión de área Algoritmo de Warnock</h3>
+          <p>Hay 4 posibles relaciones entre un polígono y el elemento de área: </p>
           <div align="center">
           <img class="img-fluid rounded" align src="imagenes/Warnock_area4.png" alt="">
           <p>Visibilidad de un polígono en un área de dibujo: a) el polígono llena el área de dibujo, b) el polígono la llena parcialmente, c) el polígono es completamente visible, d) el polígono es invisible.</p>
           </div>
           
           <h3 class="mt-0">Área de subdivisión</h3>
+          <p>Aprovecha la coherencia del área: divide el área de visualización en rectángulos sucesivamente más pequeños hasta que todo el rectángulo se pueda rellenar con un solo color. [4]</p>
           
           <div align="center">
           <div class="row">
@@ -176,6 +178,7 @@ información de sub-píxel</li>
               	<li>[1] https://es.wikipedia.org/wiki/Algoritmo_de_Warnock</li>
                 <li>[2] https://es.wikipedia.org/wiki/Determinaci%C3%B3n_de_cara_oculta</li>
                 <li>[3] https://en.wikipedia.org/wiki/Hidden_surface_determination</li>
+                <li> [4] http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf </li>
               </ul>
             </div>
           </div>
