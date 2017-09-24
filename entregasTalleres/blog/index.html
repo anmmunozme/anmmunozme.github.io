@@ -28,7 +28,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#F72257; color:#F72257">
       <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <a class="navbar-brand" href="#">Algoritmo de Warnock - HSR</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -56,7 +56,7 @@
         <div class="col-lg-8">
 
           <!-- Title -->
-          <h1 class="mt-4">Post Title</h1>
+          <h1 class="mt-4">Algoritmo de Warnock</h1>
 
           <!-- Author -->
           <p class="lead">
@@ -72,16 +72,59 @@
           <hr>
 
           <!-- Preview Image -->
-          <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-
+			<div align="center">
+          <img class="img-fluid rounded" align src="imagenes/Warnock_algorithm300.png" alt="">
+          <p>Cuatro pasos de división del área de dibujo para una escena sencilla.</p>
+          </div>
           <hr>
 
           <!-- Post Content -->
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
+          <p class="lead">Un enfoque en rasterización para solucionar el problema de visibilidad de imágenes complicadas es la implementación de algoritmos de determinación o eliminación de caras ocultas (HSR – hidden surface removal), en este blog hablamos específicamente del algoritmo de Warnock.</p>
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
+			<h2 class="mt-0">HSR</h2>
+          <p> Empecemos definiendo que es <strong> HSR </strong>, es el proceso usado para determinar que superficies y partes de superficies no son visibles desde algún punto de observación, es decir identifica que cosas no se van a ver.
+          </p>
 
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
+          
+          <h3 class="mt-0">	Técnicas para la eliminación de las caras ocultas</h3>
+          <p><strong>Selección por prisma de visión</strong></p>
+          <p><strong>Selección de caras visibles</strong></p>
+          <p><strong>Selección por oclusión</strong>></p>
+          
+          
+          <h2 class="mt-0">Algoritmo de Warnock</h2>
+          <p>
+          Este  es un algoritmo divide y vencerás de orden  <strong> O(np) </strong> siendo  <strong> n </strong> el número de polígonos y <strong>p</strong> el número de pixeles en el área de dibujo (viewport en inglés).
+          </p>
+          <h3 class="mt-0">Algoritmos de subdivisión de área Algoritmo de Warnock</h3>
+          <div align="center">
+          <img class="img-fluid rounded" align src="imagenes/Warnock_area4.png" alt="">
+          <p>Visibilidad de un polígono en un área de dibujo: a) el polígono llena el área de dibujo, b) el polígono la llena parcialmente, c) el polígono es completamente visible, d) el polígono es invisible.</p>
+          </div>
+          <p>
+          Las entradas son una lista de polígonos y un área de dibujo. El mejor caso se presenta cuando la lista de polígonos es sencilla, entonces se puede dibujar los polígonos en el área de dibujo. Por sencillo se entiende que el polígono mida un pixel (en cuyo caso el polígono o su parte se dibuja en la correspondiente parte del área de dibujo) o que el área de dibujo mida un pixel (en cuyo caso el pixel toma el color del polígono más cercano al observador). El paso recurrente consiste en dividir el área de dibujo en cuatro cuadrantes de igual tamaño y llamar al algoritmo para cada cuadrante con la lista de polígonos modificada tal que lo sólo contenga polígonos visibles en el cuadrante.3​
+          </p>
+          <h3 class="mt-0">Área de subdivisión</h3>
+          
+          <div align="center">
+          <div class="row">
+          
+          <img class="img-fluid rounded col-md-6" src="imagenes/subdiv3.png">
+          
+          <ol class="col-md-6" style="text-align:justify">Para decidir sobre pintar o subdividir un área hay 4 casos: <p></p>
+          	<li>Todos los polígonos son disjuntos respecto al área. Con el color de fondo se puede pintar el área.</li>
+            <li>Sólo hay un polígono intersecante o contenido.</li>
+            <li>Hay un solo polígono que interseca al área y es circundante.</li>
+            <li>Hay varios polígonos intersecantes, uno de ellos es circundante y está enfrente de los demás polígonos. Esto se controla con los valores z de los polígonos en los 4 vértices del área.</li>
+            </ol>
+
+          </div>
+          </div>
+          
+          
+          
+          
 
           <blockquote class="blockquote">
             <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
@@ -91,6 +134,21 @@
           </blockquote>
 
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
+          <div align="left">
+          <h3 class="mt-0">Pseudocódigo </h3>
+          <pre>
+	Warnock(PolyList PL, ViewPort VP)
+    	If ( PL es simple en VP) then
+        	Dibujar PL en VP
+        else
+        	Dividir VP horizontal y verticalmente en cuadrantes VP1,VP2,VP3,VP4
+    		Warnock(PL en VP1, VP1)
+    		Warnock(PL en VP2, VP2)
+    		Warnock(PL en VP3, VP3)
+            	Warnock(PL en VP4, VP4)
+    	end
+          </pre>
+          </div>
 
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
 
