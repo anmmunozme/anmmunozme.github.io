@@ -83,12 +83,12 @@
 
 			<h2 class="mt-0">HSR</h2>
           <p> 
-          En la computación gráfica se busca representar objetos en general, y debido a que la mayoría de los objetos no son transparentes es de interés diferenciar las superficies externas que afectan la representación gráfica, de las internas. [2] Empecemos definiendo que es <strong> HSR </strong>, es el proceso usado para determinar que superficies y partes de superficies no son visibles desde algún punto de observación, es decir identifica que cosas no se van a ver en una representación gráfica.
+          En la computación gráfica se busca representar objetos en general, y debido a que la mayoría de los objetos no son transparentes es de interés diferenciar las superficies externas que afectan la representación gráfica, de las internas.<sup>[2]</sup> Empecemos definiendo que es <strong> HSR </strong>, como su nombre lo dice (eliminación de caras ocultas) es el proceso usado para determinar que superficies y partes de superficies no son visibles desde algún punto de observación, es decir identifica que cosas no se van a ver en una representación gráfica.
           </p>
           
           <h3 class="mt-0">	Técnicas para la eliminación de las caras ocultas</h3>
-          <p>Hay muchas técnicas para la determinación de superficies ocultas. Ellos son fundamentalmente un ejercicio de clasificación , y por lo general varían en el orden en que se realiza el tipo y cómo se subdivide el problema. Ordenar grandes cantidades de primitivas gráficas se hace normalmente dividiendo y conquistando. [3]</p> 
-          <p>La ventaja de la eliminación temprana en la tubería es que objetos enteros que son invisibles no tienen que ser buscados, transformados, rasterizados o sombreados.[3] Algunos tipos de algoritmos de eliminación son:[2]</p>
+          <p>Hay muchas técnicas para la determinación de superficies ocultas. Ellos son fundamentalmente un ejercicio de clasificación , y por lo general varían en el orden en que se realiza el tipo y cómo se subdivide el problema. Ordenar grandes cantidades de primitivas gráficas se hace normalmente dividiendo y conquistando.<sup>[3]</sup></p> 
+          <p>La ventaja de la eliminación temprana en la tubería es que objetos enteros que son invisibles no tienen que ser buscados, transformados, rasterizados o sombreados.<sup>[3]</sup> Algunos tipos de algoritmos de eliminación son: <sup>[2]</sup></p>
           <p><strong>Selección por prisma de visión (frustum culling):</strong> La selección por prisma es una representación geométrica del campo de visibilidad de la cámara. Naturalmente los objetos fuera de este prisma no serán visibles en la imagen final, por tanto serán descartados.</p>
           <p><strong>Selección de caras visibles:</strong> En la selección de caras visibles se tiene en cuenta que algunas caras de los objetos o polígonos de la malla no son visibles desde la cámara por lo que no hay razón para que sean dibujadas. Esta es la razón por la que algunos videojuegos si acercamos la cámara dentro de algún objeto de la escena este desaparece.</p>
           <p><strong>Selección por oclusión:</strong> Los objetos que se encuentran ocultados totalmente por otros objetos opacos pueden ser excluidos de la imagen final. Este es un mecanismo muy popular para aumentar el rendimiento del rendering de grandes escenas. </p>
@@ -96,52 +96,58 @@
           
           <h2 class="mt-0">Algoritmo de Warnock</h2>
           <p>
-          Este algoritmo fue inventado en 1969 por John Warnock y es utilizado en computación gráfica, como se menciona anteriormente, soluciona al problema de visualización de imágenes complicadas realizando subdivisión recursiva de una escena hasta que las áreas obtenidas son fácilmente calculables. En otras palabras, hasta que la escena sea tan sencilla que permita calcular eficientemente su visualización. [1]
+          Este algoritmo fue inventado en 1969 por John Warnock(1940) y es utilizado en computación gráfica, como se menciona anteriormente, soluciona al problema de visualización de imágenes complicadas realizando subdivisión recursiva de una escena hasta que las áreas obtenidas son fácilmente calculables. En otras palabras, hasta que la escena es tan sencilla que permite calcular eficientemente su visualización.<sup>[1]</sup>
           </p>
           <p>
-          Este  es un algoritmo divide y vencerás de orden  <strong> O(np) </strong> siendo  <strong> n </strong> el número de polígonos y <strong>p</strong> el número de pixeles en el área de dibujo (viewport en inglés).
+          Este  es un algoritmo del tipo divide y vencerás de orden  <strong> O(np) </strong> siendo  <strong> n </strong> el número de polígonos y <strong>p</strong> el número de pixeles en el área de dibujo (viewport en inglés).
           </p>
           <h3 class="mt-0">Algoritmos de subdivisión de área Algoritmo de Warnock</h3>
-          <p>Hay 4 posibles relaciones entre un polígono y el elemento de área: </p>
+          <p>Para la subdivisión se parte de que hay 4 posibles relaciones entre un polígono y el elemento de área: </p>
           <div align="center">
           <img class="img-fluid rounded" align src="imagenes/Warnock_area4.png" alt="">
-          <p>Visibilidad de un polígono en un área de dibujo: a) el polígono llena el área de dibujo, b) el polígono la llena parcialmente, c) el polígono es completamente visible, d) el polígono es invisible.</p>
+          <p>a) el polígono llena el área de dibujo, b) el polígono la llena parcialmente, c) el polígono es completamente visible, d) el polígono es invisible.</p>
           </div>
           
           <h3 class="mt-0">Área de subdivisión</h3>
-          <p>Aprovecha la coherencia del área: divide el área de visualización en rectángulos sucesivamente más pequeños hasta que todo el rectángulo se pueda rellenar con un solo color. [4]</p>
+          <p>El área de visualización se divide en rectángulos sucesivamente más pequeños hasta que todo el rectángulo se pueda pintar con un solo color.</p>
+          <p><strong>Para decidir sobre pintar o subdividir un área hay 4 casos basados en las relaciones de la imagen anterior:</strong><sup>[4]</sup></p>
           
           <div align="center">
           <div class="row">
-          
           <img class="img-fluid rounded col-md-6" src="imagenes/subdiv3.png">
           
-          <ol class="col-md-6" style="text-align:justify">Para decidir sobre pintar o subdividir un área hay 4 casos: <p></p>
-          	<li>Todos los polígonos son disjuntos respecto al área. Con el color de fondo se puede pintar el área.</li>
+          <ol class="col-md-6" style="text-align:justify"><p></p>
+          	<li>Todos los polígonos son disjuntos respecto al área, entonces con el color del fondo se puede pintar el área.</li>
             <li>Sólo hay un polígono intersecante o contenido.</li>
             <li>Hay un solo polígono que interseca al área y es circundante.</li>
-            <li>Hay varios polígonos intersecantes, uno de ellos es circundante y está enfrente de los demás polígonos. Esto se controla con los valores z de los polígonos en los 4 vértices del área.</li>
-            </ol>
-
-          </div>
-          </div>
-          
-          
-          
+            <li>Hay varios polígonos intersecantes, uno de ellos es circundante y está enfrente de los demás polígonos. Se debe  dividir el área de dibujo en cuatro cuadrantes de igual tamaño y repetir la clasificación; esto se controla con los valores z de los polígonos en los 4 vértices del área.</li>
+          <p></p>
+          <p>(1, 2 y 3 casos triviales)</p>
+          </ol>
           
 
+         </div>
+      </div>
+          
+          
+          
+          
+<!--
           <blockquote class="blockquote">
             <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
             <footer class="blockquote-footer">Someone famous in
               <cite title="Source Title">Source Title</cite>
             </footer>
           </blockquote>
+          -->
 
           <p>
-          Las entradas son una lista de polígonos y un área de dibujo. El mejor caso se presenta cuando la lista de polígonos es sencilla, entonces se puede dibujar los polígonos en el área de dibujo. Por sencillo se entiende que el polígono mida un pixel (en cuyo caso el polígono o su parte se dibuja en la correspondiente parte del área de dibujo) o que el área de dibujo mida un pixel (en cuyo caso el pixel toma el color del polígono más cercano al observador). El paso recurrente consiste en dividir el área de dibujo en cuatro cuadrantes de igual tamaño y llamar al algoritmo para cada cuadrante con la lista de polígonos modificada tal que lo sólo contenga polígonos visibles en el cuadrante.[1]
+          Las entradas del algoritmo son una lista de polígonos y un área de dibujo. El mejor caso se presenta cuando la lista de polígonos es sencilla, entonces se puede dibujar los polígonos en el área de dibujo. Por sencillo se entiende que el polígono mida un pixel (en cuyo caso el polígono o su parte se dibuja en la correspondiente parte del área de dibujo) o que el área de dibujo mida un pixel (en cuyo caso el pixel toma el color del polígono más cercano al observador).<sup>[1]</sup></p> 
+          <p>El paso recurrente como se mencionó, consiste en dividir el área de dibujo en cuatro cuadrantes de igual tamaño y llamar al algoritmo recurrente para cada cuadrante con la lista de polígonos modificada tal que lo sólo contenga polígonos visibles en el cuadrante.<sup>[1]</sup>
           </p>
           <div align="left">
           <h3 class="mt-0">Pseudocódigo </h3>
+          <p></p>
           <pre>
 	Warnock(PolyList PL, ViewPort VP)
     	If ( PL es simple en VP) then
@@ -154,31 +160,33 @@
             	Warnock(PL en VP4, VP4)
     	end
           </pre>
-          <p>Otra aproximación al pseudocódigo se encuentra en http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf</p>
+          <p>Otra aproximación al pseudocódigo se encuentra <a href="http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf">aquí</a><sup>[5]</sup></p>
           </div>
           <h3 class="mt-0">Ventajas y desventajas </h3>
+          <p>Como todos los algoritmos de HSR el algoritmo de Warnock tiene cosas buenas y malas, se mencionan algunas</p>
           <ul><strong>Ventajas:</strong>
-          <li>No ocurre over-rendering</li>
-          <li>Buen anti-aliasing: basta con hacer una subdivisión para obtener más
-información de sub-píxel</li>
+          <li><u>No ocurre over-rendering</u>, es decir que no vuelve a realizar el mismo cálculo sobre una zona.</li>
+          <li><u>Buen anti-aliasing</u> por lo que basta con hacer una subdivisión para obtener más información de sub-píxel.</li>
 </ul>
 <ul><strong>Desventaja:</strong>
-<li>Las pruebas son complejas y lentas</li>
+<li><u>Las pruebas son complejas y lentas.</u></li>
 </ul>
 
           <hr>
 
-          
 
           <!-- Single Comment -->
           <div class="media mb-4">
             <div class="media-body">
-              <h5 class="mt-0">Referencias</h5>
+              <h5 class="mt-0">Referencias y bibliografía </h5>
               <ul>
-              	<li>[1] https://es.wikipedia.org/wiki/Algoritmo_de_Warnock</li>
-                <li>[2] https://es.wikipedia.org/wiki/Determinaci%C3%B3n_de_cara_oculta</li>
-                <li>[3] https://en.wikipedia.org/wiki/Hidden_surface_determination</li>
-                <li> [4] http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf </li>
+              	<li>[1] "Algoritmo de Warnock" [En línea]. Wikipedia. Disponible en <a href="https://es.wikipedia.org/wiki/Algoritmo_de_Warnock">https://es.wikipedia.org/wiki/Algoritmo_de_Warnock</a> [Revisado en: Septiembre - 2017]</li>                
+                <li>[2] "Determinación de cara oculta" [En línea]. Wikipedia. Disponible en <a href="https://es.wikipedia.org/wiki/Determinaci%C3%B3n_de_cara_oculta">https://es.wikipedia.org/wiki/Determinaci%C3%B3n_de_cara_oculta</a> [Revisado en: Septiembre - 2017]</li>
+                <li>[3] "Hidden surface determination" [En línea]. Wikipedia. Disponible en <a href="https://en.wikipedia.org/wiki/Hidden_surface_determination">https://en.wikipedia.org/wiki/Hidden_surface_determination</a> [Revisado en: Septiembre - 2017]</li>
+                <li>[4] E. Fernández "Superficies visibles" [En línea]. Disponible en <a href="http://slideplayer.es/slide/4009190/">http://slideplayer.es/slide/4009190/</a> [Revisado en: Septiembre - 2017]</li>
+                <li>[5] "Hidden Surface Removal" [En línea]. Loyola Marymount University. Disponible en <a href="http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf">http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf</a> [Revisado en: Septiembre - 2017]</li>
+                <li>[6] A. Raposo "Hidden Surfaces" [En línea]. PUC-Rio. Disponible en <a href="http://webserver2.tecgraf.puc-rio.br/~abraposo/INF1366/2004/11_HiddenSurfaces.pdf">http://webserver2.tecgraf.puc-rio.br/~abraposo/INF1366/2004/11_HiddenSurfaces.pdf</a> [Revisado en: Septiembre - 2017]</li>
+                <li>[7] B. J. Ross "Hidden Line Removal" [En línea]. Brock University, COSC 3P98 Computer Graphics. Disponible en <a href="https://www.cosc.brocku.ca/Offerings/3P98/course/lectures/hiddenlines/">https://www.cosc.brocku.ca/Offerings/3P98/course/lectures/hiddenlines/</a> [Revisado en: Septiembre - 2017]</li>
               </ul>
             </div>
           </div>
@@ -198,27 +206,24 @@ información de sub-píxel</li>
                 <div class="col-lg-6">
                   <ul class="list-unstyled mb-0">
                     <li>
-                      <a href="#">Web Design</a>
+                      <a href="#">Computación gráfica</a>
                     </li>
                     <li>
-                      <a href="#">HTML</a>
+                      <a href="#">HSR</a>
                     </li>
                     <li>
-                      <a href="#">Freebies</a>
+                      <a href="#">Algoritmo de Warnock</a>
                     </li>
+                    
                   </ul>
                 </div>
                 <div class="col-lg-6">
                   <ul class="list-unstyled mb-0">
+            
                     <li>
-                      <a href="#">JavaScript</a>
+                    	<a href="#">Subdivisión de área</a>
                     </li>
-                    <li>
-                      <a href="#">CSS</a>
-                    </li>
-                    <li>
-                      <a href="#">Tutorials</a>
-                    </li>
+                    
                   </ul>
                 </div>
               </div>
@@ -233,24 +238,24 @@ información de sub-píxel</li>
                 <div class="col-lg-6">
                   <ul class="list-unstyled mb-0">
                     <li>
-                      <a href="#">Web Design</a>
+                      <a href="#">HSR</a>
                     </li>
                     <li>
-                      <a href="#">HTML</a>
+                      <a href="#">Técnicas para eliminación de caras ocultas</a>
                     </li>
                     <li>
-                      <a href="#">Freebies</a>
+                      <a href="#">Algoritmo de Warnock</a>
                     </li>
                   
                   <ul class="list-unstyled mb-0">
                     <li>
-                      <a href="#">JavaScript</a>
+                      <a href="#">Área de subdivisión</a>
                     </li>
                     <li>
-                      <a href="#">CSS</a>
+                      <a href="#">Pseudocódigo</a>
                     </li>
                     <li>
-                      <a href="#">Tutorials</a>
+                      <a href="#">Ventajas y desventajas</a>
                     </li>
                   </ul>
                 </div>
@@ -259,12 +264,14 @@ información de sub-píxel</li>
           </div>
 
           <!-- Side Widget -->
+          <!--
           <div class="card my-4">
             <h5 class="card-header">Side Widget</h5>
             <div class="card-body">
               You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
             </div>
-          </div>
+          </div> 
+          -->
 
         </div>
 </div>
