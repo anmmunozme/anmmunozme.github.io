@@ -98,9 +98,19 @@
           <p>
           Este algoritmo fue inventado en 1969 por John Warnock(1940) y es utilizado en computación gráfica, como se menciona anteriormente, soluciona al problema de visualización de imágenes complicadas realizando subdivisión recursiva de una escena hasta que las áreas obtenidas son fácilmente calculables. En otras palabras, hasta que la escena es tan sencilla que permite calcular eficientemente su visualización.<sup>[1]</sup>
           </p>
+          
           <p>
           Este  es un algoritmo del tipo divide y vencerás de orden  <strong> O(np) </strong> siendo  <strong> n </strong> el número de polígonos y <strong>p</strong> el número de pixeles en el área de dibujo (viewport en inglés).
           </p>
+          
+          <h3 class="mt-0">Características</h3>
+          <ul>
+          <li>Trabaja con polígonos planos</li>
+          <li>Tiene precisión de imagen: se calcula el polígono visible en cada pixel</li>
+          <li>Se trata de solucionar la visibilidad en rectángulos (bloques) de pixeles</li>
+          <li>Es un algoritmo recursivo, en cada llamada se clasifica una lista de polígonos respecto del rectángulo actual</li>
+          </ul>
+          
           <h3 class="mt-0">Algoritmos de subdivisión de área Algoritmo de Warnock</h3>
           <p>Para la subdivisión se parte de que hay 4 posibles relaciones entre un polígono y el elemento de área: </p>
           <div align="center">
@@ -172,6 +182,8 @@
 <li><u>Las pruebas son complejas y lentas.</u></li>
 </ul>
 
+		<h3 class="mt-0">Implementaciones</h3>
+
           <hr>
 
 
@@ -187,6 +199,7 @@
                 <li>[5] "Hidden Surface Removal" [En línea]. Loyola Marymount University. Disponible en <a href="http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf">http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf</a> [Revisado en: Septiembre - 2017]</li>
                 <li>[6] A. Raposo "Hidden Surfaces" [En línea]. PUC-Rio. Disponible en <a href="http://webserver2.tecgraf.puc-rio.br/~abraposo/INF1366/2004/11_HiddenSurfaces.pdf">http://webserver2.tecgraf.puc-rio.br/~abraposo/INF1366/2004/11_HiddenSurfaces.pdf</a> [Revisado en: Septiembre - 2017]</li>
                 <li>[7] B. J. Ross "Hidden Line Removal" [En línea]. Brock University, COSC 3P98 Computer Graphics. Disponible en <a href="https://www.cosc.brocku.ca/Offerings/3P98/course/lectures/hiddenlines/">https://www.cosc.brocku.ca/Offerings/3P98/course/lectures/hiddenlines/</a> [Revisado en: Septiembre - 2017]</li>
+                <li>https://lsi.ugr.es/curena/doce/vr/transpa/11-12/vr-c02-impr.pdf</li>
               </ul>
             </div>
           </div>
