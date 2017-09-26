@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Post - Start Bootstrap Template</title>
+    <title>Algoritmo de Warnock</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -79,13 +79,13 @@
           <hr>
 
           <!-- Post Content -->
-          <p class="lead">Un enfoque para solucionar el problema de visibilidad de imágenes complicadas es la implementación de algoritmos de determinación o eliminación de caras ocultas (HSR – hidden surface removal), en este blog hablamos específicamente del algoritmo de Warnock.</p>
-
+          <p class="lead">Un enfoque para solucionar el problema de visibilidad de imágenes complicadas es la implementación de algoritmos de determinación o eliminación de caras ocultas (HSR – hidden surface removal), en este blog hablamos específicamente del algoritmo de Warnock.</p><p id="hsr"></p>
+          
 			<h2 class="mt-0">HSR</h2>
           <p> 
           En la computación gráfica se busca representar objetos en general, y debido a que la mayoría de los objetos no son transparentes es de interés diferenciar las superficies externas que afectan la representación gráfica, de las internas.<sup>[2]</sup> Empecemos definiendo que es <strong> HSR </strong>, como su nombre lo dice (eliminación de caras ocultas) es el proceso usado para determinar que superficies y partes de superficies no son visibles desde algún punto de observación, es decir identifica que cosas no se van a ver en una representación gráfica.
           </p>
-          
+          <p id="tecnicas"></p>
           <h3 class="mt-0">	Técnicas para la eliminación de las caras ocultas</h3>
           <p>Hay muchas técnicas para la determinación de superficies ocultas. Ellos son fundamentalmente un ejercicio de clasificación , y por lo general varían en el orden en que se realiza el tipo y cómo se subdivide el problema. Ordenar grandes cantidades de primitivas gráficas se hace normalmente dividiendo y conquistando.<sup>[3]</sup></p> 
           <p>La ventaja de la eliminación temprana en la tubería es que objetos enteros que son invisibles no tienen que ser buscados, transformados, rasterizados o sombreados.<sup>[3]</sup> Algunos tipos de algoritmos de eliminación son: <sup>[2]</sup></p>
@@ -93,7 +93,7 @@
           <p><strong>Selección de caras visibles:</strong> En la selección de caras visibles se tiene en cuenta que algunas caras de los objetos o polígonos de la malla no son visibles desde la cámara por lo que no hay razón para que sean dibujadas. Esta es la razón por la que algunos videojuegos si acercamos la cámara dentro de algún objeto de la escena este desaparece.</p>
           <p><strong>Selección por oclusión:</strong> Los objetos que se encuentran ocultados totalmente por otros objetos opacos pueden ser excluidos de la imagen final. Este es un mecanismo muy popular para aumentar el rendimiento del rendering de grandes escenas. </p>
           
-          
+          <p id="algoritmo"></p>
           <h2 class="mt-0">Algoritmo de Warnock</h2>
           <p>
           Este algoritmo fue inventado en 1969 por John Warnock(1940) y es utilizado en computación gráfica, como se menciona anteriormente, soluciona al problema de visualización de imágenes complicadas realizando subdivisión recursiva de una escena hasta que las áreas obtenidas son fácilmente calculables. En otras palabras, hasta que la escena es tan sencilla que permite calcular eficientemente su visualización.<sup>[1]</sup>
@@ -102,22 +102,22 @@
           <p>
           Este  es un algoritmo del tipo divide y vencerás de orden  <strong> O(np) </strong> siendo  <strong> n </strong> el número de polígonos y <strong>p</strong> el número de pixeles en el área de dibujo (viewport en inglés).
           </p>
-          
+          <p id="caracteristicas"></p>
           <h3 class="mt-0">Características</h3>
           <ul>
           <li>Trabaja con polígonos planos</li>
           <li>Tiene precisión de imagen: se calcula el polígono visible en cada pixel</li>
           <li>Se trata de solucionar la visibilidad en rectángulos (bloques) de pixeles</li>
-          <li>Es un algoritmo recursivo, en cada llamada se clasifica una lista de polígonos respecto del rectángulo actual</li>
+          <li>Es un algoritmo recursivo, en cada llamada se clasifica una lista de polígonos respecto del rectángulo actual<sup>[6]</sup></li>
           </ul>
-          
+          <p id="area"></p>
           <h3 class="mt-0">Algoritmos de subdivisión de área Algoritmo de Warnock</h3>
           <p>Para la subdivisión se parte de que hay 4 posibles relaciones entre un polígono y el elemento de área: </p>
           <div align="center">
           <img class="img-fluid rounded" align src="imagenes/Warnock_area4.png" alt="">
           <p>a) el polígono llena el área de dibujo, b) el polígono la llena parcialmente, c) el polígono es completamente visible, d) el polígono es invisible.</p>
           </div>
-          
+          <p id="subdivision"></p>
           <h3 class="mt-0">Área de subdivisión</h3>
           <p>El área de visualización se divide en rectángulos sucesivamente más pequeños hasta que todo el rectángulo se pueda pintar con un solo color.</p>
           <p><strong>Para decidir sobre pintar o subdividir un área hay 4 casos basados en las relaciones de la imagen anterior:</strong><sup>[4]</sup></p>
@@ -130,7 +130,7 @@
           	<li>Todos los polígonos son disjuntos respecto al área, entonces con el color del fondo se puede pintar el área.</li>
             <li>Sólo hay un polígono intersecante o contenido, entonces se pinta con el color de fondo, y se dibuja el polígono contenido o la porción de intersección</li>
             <li>Hay un solo polígono que interseca al área y es circundante, entonces pinta el área de dibujo con el color de ese polígono</li>
-            <li>Hay varios polígonos intersecantes, uno de ellos es circundante y está enfrente de los demás polígonos. Se debe  dividir el área de dibujo en cuatro cuadrantes de igual tamaño y repetir la clasificación; esto se controla con los valores z de los polígonos en los 4 vértices del área.</li>
+            <li>Hay varios polígonos intersecantes, uno de ellos es circundante y está enfrente de los demás polígonos. Se debe  dividir el área de dibujo en cuatro cuadrantes de igual tamaño y repetir la clasificación; esto se controla con los valores z de los polígonos en los 4 vértices del área.<sup>[5]</sup></li>
           <p></p>
           <p>(1, 2 y 3 casos triviales)</p>
           </ol>
@@ -155,6 +155,7 @@
           Las entradas del algoritmo son una lista de polígonos y un área de dibujo. El mejor caso se presenta cuando la lista de polígonos es sencilla, entonces se puede dibujar los polígonos en el área de dibujo. Por sencillo se entiende que el polígono mida un pixel (en cuyo caso el polígono o su parte se dibuja en la correspondiente parte del área de dibujo) o que el área de dibujo mida un pixel (en cuyo caso el pixel toma el color del polígono más cercano al observador).<sup>[1]</sup></p> 
           <p>El paso recurrente como se mencionó, consiste en dividir el área de dibujo en cuatro cuadrantes de igual tamaño y llamar al algoritmo recurrente para cada cuadrante con la lista de polígonos modificada tal que lo sólo contenga polígonos visibles en el cuadrante.<sup>[1]</sup>
           </p>
+          <p id="pseudocodigo"></p>
           <div align="left">
           <h3 class="mt-0">Pseudocódigo </h3>
           <p></p>
@@ -170,8 +171,10 @@
             	Warnock(PL en VP4, VP4)
     	end
           </pre>
-          <p>Otra aproximación al pseudocódigo se encuentra <a href="http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf">aquí</a><sup>[5]</sup></p>
+          <p>Otra aproximación al pseudocódigo se encuentra <a href="http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf">aquí</a></p>
           </div>
+          
+          <p id="ventajas"></p>
           <h3 class="mt-0">Ventajas y desventajas </h3>
           <p>Como todos los algoritmos de HSR el algoritmo de Warnock tiene cosas buenas y malas, se mencionan algunas</p>
           <ul><strong>Ventajas:</strong>
@@ -181,25 +184,36 @@
 <ul><strong>Desventaja:</strong>
 <li><u>Las pruebas son complejas y lentas.</u></li>
 </ul>
-
+		<!--
 		<h3 class="mt-0">Implementaciones</h3>
+        -->
 
           <hr>
-
 
           <!-- Single Comment -->
           <div class="media mb-4">
             <div class="media-body">
-              <h5 class="mt-0">Referencias y bibliografía </h5>
+              <h5 class="mt-0">Referencias</h5>
               <ul>
               	<li>[1] "Algoritmo de Warnock" [En línea]. Wikipedia. Disponible en <a href="https://es.wikipedia.org/wiki/Algoritmo_de_Warnock">https://es.wikipedia.org/wiki/Algoritmo_de_Warnock</a> [Revisado en: Septiembre - 2017]</li>                
                 <li>[2] "Determinación de cara oculta" [En línea]. Wikipedia. Disponible en <a href="https://es.wikipedia.org/wiki/Determinaci%C3%B3n_de_cara_oculta">https://es.wikipedia.org/wiki/Determinaci%C3%B3n_de_cara_oculta</a> [Revisado en: Septiembre - 2017]</li>
                 <li>[3] "Hidden surface determination" [En línea]. Wikipedia. Disponible en <a href="https://en.wikipedia.org/wiki/Hidden_surface_determination">https://en.wikipedia.org/wiki/Hidden_surface_determination</a> [Revisado en: Septiembre - 2017]</li>
-                <li>[4] E. Fernández "Superficies visibles" [En línea]. Disponible en <a href="http://slideplayer.es/slide/4009190/">http://slideplayer.es/slide/4009190/</a> [Revisado en: Septiembre - 2017]</li>
-                <li>[5] "Hidden Surface Removal" [En línea]. Loyola Marymount University. Disponible en <a href="http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf">http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf</a> [Revisado en: Septiembre - 2017]</li>
-                <li>[6] A. Raposo "Hidden Surfaces" [En línea]. PUC-Rio. Disponible en <a href="http://webserver2.tecgraf.puc-rio.br/~abraposo/INF1366/2004/11_HiddenSurfaces.pdf">http://webserver2.tecgraf.puc-rio.br/~abraposo/INF1366/2004/11_HiddenSurfaces.pdf</a> [Revisado en: Septiembre - 2017]</li>
-                <li>[7] B. J. Ross "Hidden Line Removal" [En línea]. Brock University, COSC 3P98 Computer Graphics. Disponible en <a href="https://www.cosc.brocku.ca/Offerings/3P98/course/lectures/hiddenlines/">https://www.cosc.brocku.ca/Offerings/3P98/course/lectures/hiddenlines/</a> [Revisado en: Septiembre - 2017]</li>
-                <li>[8] C. Ureña "Visualización y Realismo: Capítulo 2. Eliminación de Partes Ocultas" [En linea]. Disponible en <a href="https://lsi.ugr.es/curena/doce/vr/transpa/11-12/vr-c02-impr.pdf">https://lsi.ugr.es/curena/doce/vr/transpa/11-12/vr-c02-impr.pdf</a> [Revisado en: Septiembre - 2017]</li>
+                <li>[4] E. Fernández "Superficies visibles" [En línea]. Disponible en <a href="http://slideplayer.es/slide/4009190/">http://slideplayer.es/slide/4009190/</a> [Revisado en: Septiembre - 2017]</li>               
+                <li>[5] B. J. Ross "Hidden Line Removal" [En línea]. Brock University, COSC 3P98 Computer Graphics. Disponible en <a href="https://www.cosc.brocku.ca/Offerings/3P98/course/lectures/hiddenlines/">https://www.cosc.brocku.ca/Offerings/3P98/course/lectures/hiddenlines/</a> [Revisado en: Septiembre - 2017]</li>
+                <li>[6] C. Ureña "Visualización y Realismo: Capítulo 2. Eliminación de Partes Ocultas" [En linea]. Disponible en <a href="https://lsi.ugr.es/curena/doce/vr/transpa/11-12/vr-c02-impr.pdf">https://lsi.ugr.es/curena/doce/vr/transpa/11-12/vr-c02-impr.pdf</a> [Revisado en: Septiembre - 2017]</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- bibliografia-->
+          <div class="media mb-4">
+            <div class="media-body">
+              <h5 class="mt-0">Bibliografía </h5>
+              <ul>
+                
+                <li>"Hidden Surface Removal" [En línea]. Loyola Marymount University. Disponible en <a href="http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf">http://myweb.lmu.edu/dondi/share/cg/hsr-v02.pdf</a> [Revisado en: Septiembre - 2017]</li>
+                <li>A. Raposo "Hidden Surfaces" [En línea]. PUC-Rio. Disponible en <a href="http://webserver2.tecgraf.puc-rio.br/~abraposo/INF1366/2004/11_HiddenSurfaces.pdf">http://webserver2.tecgraf.puc-rio.br/~abraposo/INF1366/2004/11_HiddenSurfaces.pdf</a> [Revisado en: Septiembre - 2017]</li>
+          
               </ul>
             </div>
           </div>
@@ -248,49 +262,48 @@
             <h5 class="card-header">Contenido</h5>
             <div class="card-body">
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                   <ul class="list-unstyled mb-0">
                     <li>
-                      <a href="#">HSR</a>
+                      <a href="#hsr">HSR</a>
                     </li>
+                    <ul>
+	                    <li>
+    	                  <a href="#tecnicas">Técnicas para eliminación de caras ocultas</a>
+        	            </li>
+                    </ul>
                     <li>
-                      <a href="#">Técnicas para eliminación de caras ocultas</a>
+                      <a href="#algoritmo">Algoritmo de Warnock</a>
                     </li>
-                    <li>
-                      <a href="#">Algoritmo de Warnock</a>
-                    </li>
+                    <ul>
+	                    <li>
+    	                  <a href="#caracteristicas">Características</a>
+        	            </li>
+                        <li>
+                        <a href="#area">Algoritmos de subdivisión de área</a>
+                        </li>
+                    
+	                    <li>
+    	                  <a href="#subdivision">Área de subdivisión</a>
+        	            </li>
+            	        <li>
+                	      <a href="#pseudocodigo">Pseudocódigo</a>
+                    	</li>
+                    	<li>
+                      		<a href="#ventajas">Ventajas y desventajas</a>
+                    	</li>
+                     </ul>
                   
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">Área de subdivisión</a>
-                    </li>
-                    <li>
-                      <a href="#">Pseudocódigo</a>
-                    </li>
-                    <li>
-                      <a href="#">Ventajas y desventajas</a>
-                    </li>
-                  </ul>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Side Widget -->
-          <!--
-          <div class="card my-4">
-            <h5 class="card-header">Side Widget</h5>
-            <div class="card-body">
-              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-            </div>
-          </div> 
-          -->
-
         </div>
 </div>
       </div>
       <!-- /.row -->
-
+<a href="#" id="toTop" class="" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
     </div>
     <!-- /.container -->
 

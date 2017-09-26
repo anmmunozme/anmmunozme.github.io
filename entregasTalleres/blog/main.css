@@ -147,3 +147,19 @@ i:hover{
 	border-radius: 0%;
 
 	}
+	
+#toTop {
+	background:url(imagenes/bou4.png);
+    display: none;
+    text-decoration: none;
+    position: fixed;
+    z-index: 100;
+    bottom: 100px;
+    right: 4px;
+    overflow: hidden;
+    width: 56px;
+    height: 56px;
+    border: none;
+    text-indent: -999px;
+	border-radius: 100%;
+}
